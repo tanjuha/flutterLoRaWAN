@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lo_ra_wan/pages/autoListInstruments.dart';
 
 class ListInstruments extends StatefulWidget {
   const ListInstruments({super.key});
@@ -36,11 +37,11 @@ class _ListInstrumentsState extends State<ListInstruments>
           // SizedBox(height: 16.0),
           Container(
             height: 150.0,
-            width: 150.0,
+            width: 180.0,
             child: TabBarView(
               controller: _tabController,
               children: const [
-                Center(child: Text('Content for Auto')),
+                AutoListInstruments(),
                 Center(child: Text('Content for Manual')),
               ],
             ),
