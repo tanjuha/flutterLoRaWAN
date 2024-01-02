@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lo_ra_wan/pages/autoListInstruments.dart';
+import 'package:flutter_lo_ra_wan/pages/manualInstruments.dart';
 
 class ListInstruments extends StatefulWidget {
   const ListInstruments({super.key});
@@ -23,7 +24,7 @@ class _ListInstrumentsState extends State<ListInstruments>
   Widget build(BuildContext context) {
     return Container(
       height: 200.0,
-      width: 200.0,
+      width: 280.0,
       // padding: EdgeInsets.all(16.0),
       child: Column(
         children: [
@@ -37,12 +38,12 @@ class _ListInstrumentsState extends State<ListInstruments>
           // SizedBox(height: 16.0),
           Container(
             height: 150.0,
-            width: 180.0,
+            width: 260.0,
             child: TabBarView(
               controller: _tabController,
               children: const [
                 AutoListInstruments(),
-                Center(child: Text('Content for Manual')),
+                ManualRange(),
               ],
             ),
           ),
