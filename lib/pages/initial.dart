@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lo_ra_wan/pages/listInstruments.dart';
 
 class Initial extends StatelessWidget {
   const Initial({super.key});
@@ -14,12 +15,39 @@ class Initial extends StatelessWidget {
         ),
         body: Center(
           child: ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/home');
-              },
-              child: const Text('Add')
-          )
-        )
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('LoRa'),
+                      content: const ListInstruments(),
+                      actions: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('Cancel')
+                            ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('Ok')
+                            ),
+                          ],
+                        )
+                      ],
+                    );
+                  }
+              );
+            },
+            child: const Text('Add'),
+          ),
+        ),
     );
   }
 }
