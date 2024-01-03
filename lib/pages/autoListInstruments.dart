@@ -26,7 +26,7 @@ class AutoListInstruments extends StatefulWidget {
 class _AutoListInstrumentsState extends State<AutoListInstruments> {
 
   Future<List<Item>> loadJsonData() async {
-    String jsonString = await rootBundle.loadString('assets/list.json');
+    String jsonString = await rootBundle.loadString('assets/data/list.json');
     List<dynamic> jsonList = json.decode(jsonString);
 
     return jsonList.map((item) => Item.fromJson(item)).toList();

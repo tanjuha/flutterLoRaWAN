@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lo_ra_wan/pages/initial.dart';
+import 'package:flutter_lo_ra_wan/pages/sensors.dart';
 
 
 void main() {
@@ -10,6 +11,7 @@ void main() {
     initialRoute: '/',
     routes: {
       '/': (context) => const Initial(),
+      '/sensors': (context) => const Sensors()
     },
   ));
 }
