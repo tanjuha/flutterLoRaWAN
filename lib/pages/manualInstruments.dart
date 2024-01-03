@@ -15,6 +15,11 @@ class _ManualRangeState extends State<ManualRange> {
       children: [
         const Text('Serial D0 - 14 - 11 - E0 - 00 - 00 - 00 - 00'),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+          ),
           onPressed: () {
             showDialog(
                 context: context,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lo_ra_wan/pages/deviceAddress.dart';
 
 class Sensors extends StatefulWidget {
   const Sensors({super.key});
@@ -74,6 +75,13 @@ class _SensorsState extends State<Sensors> {
             ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).pop();
+
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const DeviceAddress();
+                      }
+                  );
                 },
                 child: const Text('Ok')
             ),
