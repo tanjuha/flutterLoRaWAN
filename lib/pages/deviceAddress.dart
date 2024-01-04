@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lo_ra_wan/pages/channel.dart';
 
 class DeviceAddress extends StatefulWidget {
   const DeviceAddress({super.key});
@@ -82,6 +83,34 @@ class _DeviceAddressState extends State<DeviceAddress> {
                       ),
                     ),
                     onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('Channel'),
+                              content: const Channel(),
+                              actions: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('Cancel')
+                                    ),
+                                    ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('Ok')
+                                    ),
+                                  ],
+                                )
+                              ],
+                            );
+                          }
+                      );
                     },
                     child: const Text('Add Channel')
                 ),

@@ -1,0 +1,5 @@
+[
+  {"id": 0, "name": "Temperature"},
+  {"id": 1, "name": "Humidity"},
+  {"id": 2, "name": "Differential pressure"}
+]
