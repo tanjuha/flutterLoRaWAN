@@ -28,21 +28,64 @@ class LoRaWANFormModel extends ChangeNotifier {
   bool get isSelectedChannel => _isSelectedChannel;
   String get selectedData => _selectedData;
 
+
+  // Device Address
+  late TextEditingController applicationKeyController;
+  late TextEditingController applicationRateController;
+  late TextEditingController deviceAddressController;
+  late TextEditingController networkKeyController;
+
+
+  LoRaWANFormModel({
+    String applicationKeyInitialValue = '',
+    String applicationRateInitialValue = '15',
+    String deviceAddressInitialValue = '',
+    String networkKeyInitialValue = '',
+}) {
+    applicationKeyController = TextEditingController(text: applicationKeyInitialValue);
+    applicationRateController = TextEditingController(text: applicationRateInitialValue);
+    deviceAddressController = TextEditingController(text: deviceAddressInitialValue);
+    networkKeyController = TextEditingController(text: networkKeyInitialValue);
+  }
+
+  void updateValueApplicationKey(String newValue) {
+    applicationKeyController.text = newValue;
+    notifyListeners();
+  }
+
+  void updateValueApplicationRate(String newValue) {
+    applicationRateController.text = newValue;
+    notifyListeners();
+  }
+
+  void updateValueDeviceAddress(String newValue) {
+    deviceAddressController.text = newValue;
+    notifyListeners();
+  }
+
+  void updateValueNetworkKey(String newValue) {
+    networkKeyController.text = newValue;
+    notifyListeners();
+  }
+
   void updateSelectedItem(Item newItem) {
     _selectedItem = newItem;
     String option = newItem.option;
 
     switch (option) {
       case 'option_temperature':
-        _selectedData = 'option_temperature';
+        updateValueDeviceAddress("temperature: 31312");
+        updateValueNetworkKey("temperature: 00000");
         _isSelectedChannel = true;
         break;
       case 'option_humidity':
-        _selectedData = 'option_humidity';
+        updateValueDeviceAddress("humidity: 3456");
+        updateValueNetworkKey("humidity: 11111");
         _isSelectedChannel = true;
         break;
       case 'option_differential_pressure':
-        _selectedData = 'option_differential_pressure';
+        updateValueDeviceAddress("differential pressure: 2345");
+        updateValueNetworkKey("differential pressure: 22222");
         _isSelectedChannel = true;
         break;
       default:

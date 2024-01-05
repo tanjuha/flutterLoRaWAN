@@ -26,24 +26,60 @@ class _DeviceAddressState extends State<DeviceAddress> {
             children: [
               Visibility(
                 visible: loRaWANFormModel.isSelectedChannel,
-                child: const TextField( decoration: InputDecoration(label: Text('Device Address:')),),
+                child: Consumer<LoRaWANFormModel>(
+                  builder: (context, model, _) {
+                    return TextField(
+                      controller: model.deviceAddressController,
+                      decoration: InputDecoration(labelText: 'Device Address:'),
+                      onChanged: (newValue) {
+                        model.updateValueDeviceAddress(newValue);
+                      },
+                    );
+                  },
+                ),
               ),
-              const TextField( decoration: InputDecoration(label: Text('Application Key:')),),
+              Consumer<LoRaWANFormModel>(
+                builder: (context, model, _) {
+                  return TextField(
+                    controller: model.applicationKeyController,
+                    decoration: InputDecoration(labelText: 'Application Key:'),
+                    onChanged: (newValue) {
+                      model.updateValueApplicationKey(newValue);
+                    },
+                  );
+                },
+              ),
               Visibility(
                 visible: loRaWANFormModel.isSelectedChannel,
-                child: const TextField( decoration: InputDecoration(label: Text('Network Key:')),),
+                child: Consumer<LoRaWANFormModel>(
+                  builder: (context, model, _) {
+                    return TextField(
+                      controller: model.networkKeyController,
+                      decoration: InputDecoration(labelText: 'Network Key:'),
+                      onChanged: (newValue) {
+                        model.updateValueNetworkKey(newValue);
+                      },
+                    );
+                  },
+                ),
               ),
-              const Row(
+               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   SizedBox(
                     width: 120.0,
-                    child: TextField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelText: 'Application Rate',
-                      ),
-                    ),
+                    child: Consumer<LoRaWANFormModel>(
+                      builder: (context, model, _) {
+                        return TextField(
+                          controller: model.applicationRateController,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(labelText: 'Application Rate:'),
+                          onChanged: (newValue) {
+                            model.updateValueApplicationRate(newValue);
+                          },
+                        );
+                      },
+                    )
                   ),
                   Padding(padding: EdgeInsets.only(left: 15.0)),
                   Text("Minutes")
@@ -178,7 +214,7 @@ class _DeviceAddressState extends State<DeviceAddress> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    // Navigator.of(context).pop();
                   },
                   child: const Text('Ok')
               ),

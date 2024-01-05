@@ -54,7 +54,6 @@ class _ChannelState extends State<Channel> {
   Widget build(BuildContext context) {
     final loRaWANFormModel = Provider.of<LoRaWANFormModel>(context, listen: true);
 
-
     return DropdownButton<Item>(
       value: selectedValue,
       isExpanded: true,
