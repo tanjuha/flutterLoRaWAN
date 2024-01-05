@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
+import 'package:provider/provider.dart';
+import 'package:flutter_lo_ra_wan/models/LoRaWANFormModel.dart';
 
 class Item {
   final int id;
   final String name;
+  final String option;
 
-  Item({required this.id, required this.name});
+  Item({required this.id, required this.name, required this.option});
 
   factory Item.fromJson(Map<String, dynamic> json) {
     return Item(
       id: json['id'],
       name: json['name'],
+      option: json['option'],
     );
   }
 }
@@ -33,7 +37,7 @@ class _ChannelState extends State<Channel> {
   }
 
   List<Item> items = [];
-  Item? selectedValue;
+  late Item selectedValue = Item(id: 0, name: '', option: '');
 
   @override
   void initState() {
@@ -41,21 +45,29 @@ class _ChannelState extends State<Channel> {
     loadJsonData().then((loadedItems) {
       setState(() {
         items = loadedItems;
+        selectedValue = items.first;
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final loRaWANFormModel = Provider.of<LoRaWANFormModel>(context, listen: true);
+
+
     return DropdownButton<Item>(
       value: selectedValue,
       isExpanded: true,
       menuMaxHeight: 120.0,
       hint: const Text('Select Channel'),
-      onChanged: ( newValue) {
-        setState(() {
-          selectedValue = newValue;
-        });
+      onChanged: (newValue) {
+        if (items.contains(newValue)) {
+          loRaWANFormModel.updateSelectedItem(newValue!);
+
+          setState(() {
+            selectedValue = newValue;
+          });
+        }
       },
       items: items.map<DropdownMenuItem<Item>>((item) {
         return DropdownMenuItem(

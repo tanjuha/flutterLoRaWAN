@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lo_ra_wan/pages/channel.dart';
 import 'package:flutter_lo_ra_wan/pages/channelProperties.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_lo_ra_wan/models/LoRaWANFormModel.dart';
 
 class DeviceAddress extends StatefulWidget {
   const DeviceAddress({super.key});
@@ -11,10 +13,11 @@ class DeviceAddress extends StatefulWidget {
 
 class _DeviceAddressState extends State<DeviceAddress> {
   bool sensorValue2 = false;
-  bool isChannel = false;
 
   @override
   Widget build(BuildContext context) {
+    final loRaWANFormModel = Provider.of<LoRaWANFormModel>(context, listen: true);
+
     return AlertDialog(
         title: const Text('Device Address'),
         content: SingleChildScrollView(
@@ -22,12 +25,12 @@ class _DeviceAddressState extends State<DeviceAddress> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Visibility(
-                visible: isChannel,
+                visible: loRaWANFormModel.isSelectedChannel,
                 child: const TextField( decoration: InputDecoration(label: Text('Device Address:')),),
               ),
               const TextField( decoration: InputDecoration(label: Text('Application Key:')),),
               Visibility(
-                visible: isChannel,
+                visible: loRaWANFormModel.isSelectedChannel,
                 child: const TextField( decoration: InputDecoration(label: Text('Network Key:')),),
               ),
               const Row(
@@ -77,11 +80,11 @@ class _DeviceAddressState extends State<DeviceAddress> {
                 child: Column(
                   children: [
                     Visibility(
-                        visible: isChannel,
+                        visible: loRaWANFormModel.isSelectedChannel,
                         child: ChannelProperties()
                     ),
                     Visibility(
-                      visible: !isChannel,
+                      visible: !loRaWANFormModel.isSelectedChannel,
                       child: TextField(
                         enabled: false,
                         maxLines: 3,
@@ -98,7 +101,7 @@ class _DeviceAddressState extends State<DeviceAddress> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ElevatedButton(
-                            style: !isChannel
+                            style: !loRaWANFormModel.isSelectedChannel
                                 ? ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -110,13 +113,13 @@ class _DeviceAddressState extends State<DeviceAddress> {
                               ),
                             ),
                             onPressed: () {
-                              isChannel ? null :
+                              loRaWANFormModel.isSelectedChannel ? null :
                               showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AlertDialog(
                                       title: const Text('Channel'),
-                                      content: const Channel(),
+                                      content: Channel(),
                                       actions: [
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,10 +142,6 @@ class _DeviceAddressState extends State<DeviceAddress> {
                                     );
                                   }
                               );
-
-                              setState(() {
-                                isChannel = true;
-                              });
                             },
 
                             child: const Text('Add')
@@ -155,9 +154,7 @@ class _DeviceAddressState extends State<DeviceAddress> {
                             ),
 
                             onPressed: () {
-                              setState(() {
-                                isChannel = false;
-                              });
+                              loRaWANFormModel.removeSelectedChannel();
                             },
                             child: const Text('Remove')
                         ),

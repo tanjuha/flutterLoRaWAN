@@ -1,5 +1,5 @@
 [
-  {"id": 0, "name": "Temperature"},
-  {"id": 1, "name": "Humidity"},
-  {"id": 2, "name": "Differential pressure"}
+  {"id": 1, "name": "Temperature", "option": "option_temperature"},
+  {"id": 2, "name": "Humidity", "option": "option_humidity"},
+  {"id": 3, "name": "Differential pressure", "option": "option_differential_pressure"}
 ]
