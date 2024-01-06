@@ -1,1 +1,1 @@
-## [![Demo Video](./assets/video/lo_ra_wan.webm)
+## [![Demo Video]](./assets/video/lo_ra_wan.webm)
