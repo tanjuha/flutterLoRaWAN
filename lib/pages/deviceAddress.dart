@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lo_ra_wan/models/FormValidators.dart';
 import 'package:flutter_lo_ra_wan/pages/channel.dart';
 import 'package:flutter_lo_ra_wan/pages/channelProperties.dart';
 import 'package:provider/provider.dart';
@@ -13,12 +14,16 @@ class DeviceAddress extends StatefulWidget {
 
 class _DeviceAddressState extends State<DeviceAddress> {
   bool sensorValue2 = false;
+  final _formKey = GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
     final loRaWANFormModel = Provider.of<LoRaWANFormModel>(context, listen: true);
 
-    return AlertDialog(
+    return Form(
+      key: _formKey,
+      child:  AlertDialog(
         title: const Text('Device Address'),
         content: SingleChildScrollView(
           child: Column(
@@ -28,9 +33,15 @@ class _DeviceAddressState extends State<DeviceAddress> {
                 visible: loRaWANFormModel.isSelectedChannel,
                 child: Consumer<LoRaWANFormModel>(
                   builder: (context, model, _) {
-                    return TextField(
+                    return TextFormField(
                       controller: model.deviceAddressController,
                       decoration: InputDecoration(labelText: 'Device Address:'),
+                      validator: (value) {
+                        return FormValidators.required(value!)
+                            ?? FormValidators.minLength(value, 2)
+                            ?? FormValidators.maxLength(value, 50)
+                            ?? FormValidators.noSymbols(value);
+                      },
                       onChanged: (newValue) {
                         model.updateValueDeviceAddress(newValue);
                       },
@@ -40,9 +51,15 @@ class _DeviceAddressState extends State<DeviceAddress> {
               ),
               Consumer<LoRaWANFormModel>(
                 builder: (context, model, _) {
-                  return TextField(
+                  return TextFormField(
                     controller: model.applicationKeyController,
                     decoration: InputDecoration(labelText: 'Application Key:'),
+                    validator: (value) {
+                      return FormValidators.required(value!)
+                          ?? FormValidators.minLength(value, 2)
+                          ?? FormValidators.maxLength(value, 50)
+                          ?? FormValidators.noSymbols(value);
+                    },
                     onChanged: (newValue) {
                       model.updateValueApplicationKey(newValue);
                     },
@@ -53,9 +70,15 @@ class _DeviceAddressState extends State<DeviceAddress> {
                 visible: loRaWANFormModel.isSelectedChannel,
                 child: Consumer<LoRaWANFormModel>(
                   builder: (context, model, _) {
-                    return TextField(
+                    return TextFormField(
                       controller: model.networkKeyController,
                       decoration: InputDecoration(labelText: 'Network Key:'),
+                      validator: (value) {
+                        return FormValidators.required(value!)
+                            ?? FormValidators.minLength(value, 2)
+                            ?? FormValidators.maxLength(value, 50)
+                            ?? FormValidators.noSymbols(value);
+                      },
                       onChanged: (newValue) {
                         model.updateValueNetworkKey(newValue);
                       },
@@ -63,23 +86,30 @@ class _DeviceAddressState extends State<DeviceAddress> {
                   },
                 ),
               ),
-               Row(
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   SizedBox(
-                    width: 120.0,
-                    child: Consumer<LoRaWANFormModel>(
-                      builder: (context, model, _) {
-                        return TextField(
-                          controller: model.applicationRateController,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(labelText: 'Application Rate:'),
-                          onChanged: (newValue) {
-                            model.updateValueApplicationRate(newValue);
-                          },
-                        );
-                      },
-                    )
+                      width: 120.0,
+                      child: Consumer<LoRaWANFormModel>(
+                        builder: (context, model, _) {
+                          return TextFormField(
+                            controller: model.applicationRateController,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(labelText: 'Application Rate:'),
+                            validator: (value) {
+                              return FormValidators.required(value!)
+                                  ?? FormValidators.maxLength(value, 3)
+                                  ?? FormValidators.noSymbols(value)
+                                  ?? FormValidators.onlyNumbers(value);
+
+                            },
+                            onChanged: (newValue) {
+                              model.updateValueApplicationRate(newValue);
+                            },
+                          );
+                        },
+                      )
                   ),
                   Padding(padding: EdgeInsets.only(left: 15.0)),
                   Text("Minutes")
@@ -214,13 +244,18 @@ class _DeviceAddressState extends State<DeviceAddress> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    // Navigator.of(context).pop();
+                    if (_formKey.currentState!.validate()) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Processing Data')),
+                      );
+                    }
                   },
                   child: const Text('Ok')
               ),
             ],
           )
         ],
+      ),
     );
   }
 }

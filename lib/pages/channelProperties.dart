@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lo_ra_wan/models/FormValidators.dart';
 
 class ChannelProperties extends StatefulWidget {
   const ChannelProperties({super.key});
@@ -39,34 +40,53 @@ class _ChannelPropertiesState extends State<ChannelProperties>
             width: 140.0,
             child: TabBarView(
               controller: _tabController,
-              children: const [
+              children: [
                 Column(
                   children: [
-                    TextField(
+                    TextFormField(
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Hits',
                       ),
+                      validator: (value) {
+                        return FormValidators.required(value!)
+                            ?? FormValidators.maxLength(value, 4)
+                            ?? FormValidators.noSymbols(value)
+                            ?? FormValidators.onlyNumbers(value);
+                      },
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
                             width: 50,
-                            child:  TextField(
+                            child:  TextFormField(
                               keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 labelText: 'Min',
                               ),
+                              validator: (value) {
+                                return FormValidators.required(value!)
+                                    ?? FormValidators.maxLength(value, 4)
+                                    ?? FormValidators.noSymbols(value)
+                                    ?? FormValidators.onlyNumbers(value);
+
+                              }
                             ),
                         ),
                         SizedBox(
                           width: 50,
-                          child:  TextField(
+                          child: TextFormField(
                             keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Min',
                             ),
+                            validator: (value) {
+                              return FormValidators.required(value!)
+                                  ?? FormValidators.maxLength(value, 4)
+                                  ?? FormValidators.noSymbols(value)
+                                  ?? FormValidators.onlyNumbers(value);
+                            },
                           ),
                         )
                       ],
@@ -76,27 +96,39 @@ class _ChannelPropertiesState extends State<ChannelProperties>
                       children: [
                         SizedBox(
                           width: 50,
-                          child:  TextField(
+                          child:  TextFormField(
                             keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Hyst',
                             ),
+                            validator: (value) {
+                              return FormValidators.required(value!)
+                                  ?? FormValidators.maxLength(value, 4)
+                                  ?? FormValidators.noSymbols(value)
+                                  ?? FormValidators.onlyNumbers(value);
+                            },
                           ),
                         ),
                         SizedBox(
                           width: 50,
-                          child:  TextField(
+                          child:  TextFormField(
                             keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Hyst',
                             ),
+                            validator: (value) {
+                              return FormValidators.required(value!)
+                                  ?? FormValidators.maxLength(value, 4)
+                                  ?? FormValidators.noSymbols(value)
+                                  ?? FormValidators.onlyNumbers(value);
+                            },
                           ),
                         )
                       ],
                     )
                   ],
                 ),
-                Text('No Data Found!'),
+                const Text('No Data Found!'),
               ],
             ),
           ),
