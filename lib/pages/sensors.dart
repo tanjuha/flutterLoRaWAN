@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_lo_ra_wan/pages/deviceAddress.dart';
+import 'package:flutter_lo_ra_wan/pages/device_address.dart';
 
 class Sensors extends StatefulWidget {
   const Sensors({super.key});

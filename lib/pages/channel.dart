@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:provider/provider.dart';
-import 'package:flutter_lo_ra_wan/models/LoRaWANFormModel.dart';
+import 'package:flutter_lo_ra_wan/models/lo_ra_wan_form_model.dart';
 
 class Item {
   final int id;

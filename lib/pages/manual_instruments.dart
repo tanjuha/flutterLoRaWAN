@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_lo_ra_wan/models/LoRaWANFormModel.dart';
+import 'package:flutter_lo_ra_wan/models/lo_ra_wan_form_model.dart';
 import 'package:provider/provider.dart';
 
 class ManualRange extends StatefulWidget {

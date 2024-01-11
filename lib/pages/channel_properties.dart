@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_lo_ra_wan/models/FormValidators.dart';
+import 'package:flutter_lo_ra_wan/models/form_validators.dart';
 
 class ChannelProperties extends StatefulWidget {
   const ChannelProperties({super.key});

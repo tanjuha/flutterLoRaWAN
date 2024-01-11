@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_lo_ra_wan/models/FormValidators.dart';
+import 'package:flutter_lo_ra_wan/models/form_validators.dart';
 import 'package:flutter_lo_ra_wan/pages/channel.dart';
-import 'package:flutter_lo_ra_wan/pages/channelProperties.dart';
+import 'package:flutter_lo_ra_wan/pages/channel_properties.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_lo_ra_wan/models/LoRaWANFormModel.dart';
+import 'package:flutter_lo_ra_wan/models/lo_ra_wan_form_model.dart';
 
 class DeviceAddress extends StatefulWidget {
   const DeviceAddress({super.key});

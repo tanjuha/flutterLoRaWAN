@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_lo_ra_wan/pages/autoListInstruments.dart';
-import 'package:flutter_lo_ra_wan/pages/manualInstruments.dart';
+import 'package:flutter_lo_ra_wan/pages/auto_list_instruments.dart';
+import 'package:flutter_lo_ra_wan/pages/manual_instruments.dart';
 
 class ListInstruments extends StatefulWidget {
   const ListInstruments({super.key});

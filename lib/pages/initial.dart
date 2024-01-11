@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_lo_ra_wan/pages/listInstruments.dart';
+import 'package:flutter_lo_ra_wan/pages/list_instruments.dart';
 import 'package:flutter_lo_ra_wan/pages/sensors.dart';
 
 class Initial extends StatelessWidget {
